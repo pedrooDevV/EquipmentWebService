@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Table(name = "Users")
-public class Usuarios implements UserDetails {
+public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +33,12 @@ public class Usuarios implements UserDetails {
     @Column(nullable = false, length = 10)
     private UserRoles role;
 
+
+    public Usuario(String login, String password, UserRoles role) {
+        this.login = login;
+        this.password = password;
+        this.role = role;
+    }
 
     //Falar dele na entrevista
     @Override

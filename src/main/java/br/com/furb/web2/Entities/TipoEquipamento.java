@@ -22,8 +22,8 @@ public class TipoEquipamento {
     @Column(nullable = false, unique = true, length = 120)
     private String nome;
 
-    @OneToMany(mappedBy = "tipo")
-    private List<Equipamentos> equipamentos;
+    @OneToMany(mappedBy = "tipoEquipamento")
+    private List<Equipamento> equipamentos;
 
 
 }
