@@ -21,6 +21,8 @@ public class Equipamento {
 
     @ManyToOne
     @JoinColumn(name = "tipo_id", nullable = false)
-    private TipoEquipamento tipoEquipamento;
+    private TipoEquipamento tipo;
+
+
 
 }

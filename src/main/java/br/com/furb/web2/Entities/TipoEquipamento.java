@@ -1,5 +1,6 @@
 package br.com.furb.web2.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,7 +23,8 @@ public class TipoEquipamento {
     @Column(nullable = false, unique = true, length = 120)
     private String nome;
 
-    @OneToMany(mappedBy = "tipoEquipamento")
+    @OneToMany(mappedBy = "tipo")
+    @JsonIgnore
     private List<Equipamento> equipamentos;
 
 

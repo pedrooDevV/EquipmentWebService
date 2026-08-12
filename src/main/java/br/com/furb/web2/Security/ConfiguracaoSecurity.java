@@ -32,7 +32,8 @@ public class ConfiguracaoSecurity {
                 .authorizeHttpRequests(authorize ->
                         authorize.requestMatchers(HttpMethod.PUT, "/RestApiFurb/equipamentos/*").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.DELETE,"/RestApiFurb/equipamentos/*").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.POST, "/RestApiFurb/login").permitAll()
+                                .requestMatchers(HttpMethod.POST,  "/RestApiFurb/login",
+                                        "/RestApiFurb/registrar").permitAll()
                                 .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
