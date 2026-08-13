@@ -1,6 +1,7 @@
 package br.com.furb.web2.Services;
 
 import br.com.furb.web2.Entities.TipoEquipamento;
+import br.com.furb.web2.Exceptions.TipoEquipamentoNaoEncontradoException;
 import br.com.furb.web2.Repositories.TipoEquipamentoRepository;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,10 @@ public class TipoEquipamentoService {
 
     public TipoEquipamento buscarPorId(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Tipo de equipamento não encontrado"));
+                .orElseThrow(() ->
+                        new TipoEquipamentoNaoEncontradoException(
+                                "Tipo de equipamento não encontrado"
+                        ));
     }
 
     public TipoEquipamento salvar(TipoEquipamento tipo) {
@@ -41,7 +45,7 @@ public class TipoEquipamentoService {
 
     public void deletar(Long id) {
         TipoEquipamento tipo = buscarPorId(id);
+
         repository.delete(tipo);
     }
-
 }

@@ -2,6 +2,8 @@ package br.com.furb.web2.Services;
 
 import br.com.furb.web2.Entities.Equipamento;
 import br.com.furb.web2.Entities.TipoEquipamento;
+import br.com.furb.web2.Exceptions.EquipamentoNaoEncontradoException;
+import br.com.furb.web2.Exceptions.TipoEquipamentoNaoEncontradoException;
 import br.com.furb.web2.Repositories.EquipamentoRepository;
 import br.com.furb.web2.Repositories.TipoEquipamentoRepository;
 import org.springframework.stereotype.Service;
@@ -29,7 +31,9 @@ public class EquipamentoService {
     public Equipamento buscarPorId(Long id) {
         return equipamentoRepository.findById(id)
                 .orElseThrow(() ->
-                        new RuntimeException("Equipamento não encontrado"));
+                        new EquipamentoNaoEncontradoException(
+                                "Equipamento não encontrado"
+                        ));
     }
 
     public Equipamento criar(Equipamento equipamento) {
@@ -38,7 +42,9 @@ public class EquipamentoService {
 
         TipoEquipamento tipo = tipoRepository.findById(tipoId)
                 .orElseThrow(() ->
-                        new RuntimeException("Tipo de equipamento não encontrado"));
+                        new TipoEquipamentoNaoEncontradoException(
+                                "Tipo de equipamento não encontrado"
+                        ));
 
         equipamento.setTipo(tipo);
 
@@ -59,8 +65,9 @@ public class EquipamentoService {
             TipoEquipamento tipo = tipoRepository
                     .findById(dados.getTipo().getId())
                     .orElseThrow(() ->
-                            new RuntimeException(
-                                    "Tipo de equipamento não encontrado"));
+                            new TipoEquipamentoNaoEncontradoException(
+                                    "Tipo de equipamento não encontrado"
+                            ));
 
             equipamento.setTipo(tipo);
         }

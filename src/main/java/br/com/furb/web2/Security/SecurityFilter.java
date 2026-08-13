@@ -63,10 +63,11 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     private String recuperaToken(HttpServletRequest httpServletRequest) {
         var autoHeader = httpServletRequest.getHeader("Authorization");
-        if (autoHeader == null) {
+
+        if (autoHeader == null || !autoHeader.startsWith("Bearer ")) {
             return null;
-        } else {
-            return autoHeader.replace("Bearer ", "");
         }
+
+        return autoHeader.replace("Bearer ", "");
     }
 }

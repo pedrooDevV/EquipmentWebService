@@ -30,8 +30,8 @@ public class ConfiguracaoSecurity {
                 .sessionManagement(Session ->
                         Session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize ->
-                        authorize.requestMatchers(HttpMethod.PUT, "/RestApiFurb/equipamentos/*").hasAuthority("ADMIN")
-                                .requestMatchers(HttpMethod.DELETE, "/RestApiFurb/equipamentos/*").hasAuthority("ADMIN")
+                        authorize.requestMatchers(HttpMethod.PUT, "/RestApiFurb/**").hasAuthority("ADMIN")
+                                .requestMatchers(HttpMethod.DELETE, "/RestApiFurb/**").hasAuthority("ADMIN")
                                 .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/RestApiFurb/login",
                                         "/RestApiFurb/registrar").permitAll()
