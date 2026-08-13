@@ -32,7 +32,7 @@ public class ConfiguracaoSecurity {
                 .authorizeHttpRequests(authorize ->
                         authorize.requestMatchers(HttpMethod.PUT, "/RestApiFurb/equipamentos/*").hasAuthority("ADMIN")
                                 .requestMatchers(HttpMethod.DELETE, "/RestApiFurb/equipamentos/*").hasAuthority("ADMIN")
-                                .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").hasAuthority("ADMIN")
+                                .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/RestApiFurb/login",
                                         "/RestApiFurb/registrar").permitAll()
                                 .anyRequest().authenticated())
