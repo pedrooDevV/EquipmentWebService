@@ -30,9 +30,10 @@ public class ConfiguracaoSecurity {
                 .sessionManagement(Session ->
                         Session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize ->
-                        authorize.requestMatchers(HttpMethod.PUT, "/RestApiFurb/equipamentos/*").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.DELETE,"/RestApiFurb/equipamentos/*").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.POST,  "/RestApiFurb/login",
+                        authorize.requestMatchers(HttpMethod.PUT, "/RestApiFurb/equipamentos/*").hasAuthority("ADMIN")
+                                .requestMatchers(HttpMethod.DELETE, "/RestApiFurb/equipamentos/*").hasAuthority("ADMIN")
+                                .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").hasAuthority("ADMIN")
+                                .requestMatchers(HttpMethod.POST, "/RestApiFurb/login",
                                         "/RestApiFurb/registrar").permitAll()
                                 .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
@@ -41,12 +42,12 @@ public class ConfiguracaoSecurity {
 
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration){
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
